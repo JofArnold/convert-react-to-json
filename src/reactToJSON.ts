@@ -49,7 +49,8 @@ react.exports.createElement = ${
         ? createElementDeep.toString()
         : createElementShallow.toString()
     }      
-Root; // this is required to be the last statement for vm.runInNewContext
+var __root = exports.default    
+__root; // this is required to be the last statement for vm.runInNewContext
 `;
   if (options?.logBuildOutput) {
     fs.writeFileSync('react-to-json.log.js', compiled);

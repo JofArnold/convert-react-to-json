@@ -11,7 +11,7 @@ const JSONComponent = (props: { children: ReactNode }): ReactElement => {
   );
 };
 
-export const Root = (props: { array: string[] }): ReactElement => {
+const App = (props: { array: string[] }): ReactElement => {
   return (
     <JSONComponent>
       {props.array.map((str, i) => (
@@ -21,3 +21,5 @@ export const Root = (props: { array: string[] }): ReactElement => {
     </JSONComponent>
   );
 };
+
+export default App;
