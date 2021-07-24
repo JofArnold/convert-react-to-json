@@ -6,7 +6,7 @@
   "repository": "https://github.com/jofarnold/react-to-json.git",
   "author": "Jof Arnold",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "scripts": {
     "test": "jest",
     "build": "rm -rf dist && yarn tsc -b"
