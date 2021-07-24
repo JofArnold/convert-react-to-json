@@ -39,7 +39,7 @@ export async function reactToJSON(
     exports: {},
     module: {},
   };
-  // @TODO - insert this code with Babel instead
+  // @TODO - insert this code with Babel or Rollup instead
   compiled =
     compiled +
     `
@@ -59,9 +59,9 @@ Root; // this is required to be the last statement for vm.runInNewContext
   // Execute the returned function - a React component normally
   const evaluated = result(reactProps);
 
-  const stringifyParams: ArgsType<typeof JSON.stringify> = [evaluated, null];
+  const stringifyParams: ArgsType<typeof JSON.stringify> = [evaluated];
   if (options?.prettyPrint) {
-    stringifyParams.push(2);
+    stringifyParams.push(...[null, 2]);
   }
   return JSON.stringify(...stringifyParams);
 }

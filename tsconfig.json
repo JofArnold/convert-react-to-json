@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "checkJs": true,
+    "checkJs": false,
     "declaration": true,
     "esModuleInterop": true,
     "jsx": "react",
@@ -10,7 +10,7 @@
     "outDir": "./dist",
     "sourceMap": true,
     "strict": true,
-    "target": "ES2015",
+    "target": "esnext"
   },
   "include": [
     "src"

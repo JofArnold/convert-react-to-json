@@ -1,7 +1,7 @@
 import { reactToJSON } from '../src';
 const path = require('path');
 
-const src = path.resolve(__dirname, 'JSONComponent.tsx');
+const src = path.resolve(__dirname, '../__fixtures__/JSONComponent.tsx');
 
 test('reactToJSON correctly generates JSON', async () => {
   const output = await reactToJSON(src, {
@@ -9,7 +9,7 @@ test('reactToJSON correctly generates JSON', async () => {
   });
 
   expect(output).toMatchInlineSnapshot(
-    `"{\\"key\\":null,\\"props\\":{\\"children\\":[[{\\"type\\":\\"div\\",\\"key\\":\\"0\\",\\"props\\":{\\"children\\":\\"one\\"}},{\\"type\\":\\"div\\",\\"key\\":\\"1\\",\\"props\\":{\\"children\\":\\"two\\"}}],{\\"key\\":null,\\"props\\":{\\"text\\":\\"Bar\\"}}]}}"`
+    `"{\\"type\\":\\"JSONComponent\\",\\"children\\":[[{\\"type\\":\\"div\\",\\"props\\":{\\"key\\":0},\\"children\\":[\\"one\\"]},{\\"type\\":\\"div\\",\\"props\\":{\\"key\\":1},\\"children\\":[\\"two\\"]}],{\\"type\\":\\"Bar\\",\\"text\\":\\"Bar\\",\\"children\\":[]}]}"`
   );
 });
 
@@ -26,45 +26,34 @@ test('reactToJSON correctly generates JSON with pretty print', async () => {
 
   expect(output).toMatchInlineSnapshot(`
     "{
-      \\"key\\": null,
-      \\"ref\\": null,
-      \\"props\\": {
-        \\"children\\": [
-          [
-            {
-              \\"type\\": \\"div\\",
-              \\"key\\": \\"0\\",
-              \\"ref\\": null,
-              \\"props\\": {
-                \\"children\\": \\"one\\"
-              },
-              \\"_owner\\": null,
-              \\"_store\\": {}
-            },
-            {
-              \\"type\\": \\"div\\",
-              \\"key\\": \\"1\\",
-              \\"ref\\": null,
-              \\"props\\": {
-                \\"children\\": \\"two\\"
-              },
-              \\"_owner\\": null,
-              \\"_store\\": {}
-            }
-          ],
+      \\"type\\": \\"JSONComponent\\",
+      \\"children\\": [
+        [
           {
-            \\"key\\": null,
-            \\"ref\\": null,
+            \\"type\\": \\"div\\",
             \\"props\\": {
-              \\"text\\": \\"Bar\\"
+              \\"key\\": 0
             },
-            \\"_owner\\": null,
-            \\"_store\\": {}
+            \\"children\\": [
+              \\"one\\"
+            ]
+          },
+          {
+            \\"type\\": \\"div\\",
+            \\"props\\": {
+              \\"key\\": 1
+            },
+            \\"children\\": [
+              \\"two\\"
+            ]
           }
-        ]
-      },
-      \\"_owner\\": null,
-      \\"_store\\": {}
+        ],
+        {
+          \\"type\\": \\"Bar\\",
+          \\"text\\": \\"Bar\\",
+          \\"children\\": []
+        }
+      ]
     }"
   `);
 });
@@ -81,5 +70,82 @@ test('reactToJSON correctly generates JSON with pretty print, deep', async () =>
     }
   );
 
-  expect(output).toMatchInlineSnapshot();
+  expect(output).toMatchInlineSnapshot(`
+    "{
+      \\"type\\": \\"div\\",
+      \\"props\\": null,
+      \\"children\\": [
+        {
+          \\"type\\": \\"span\\",
+          \\"props\\": null,
+          \\"children\\": [
+            \\"JSONComponent\\"
+          ]
+        },
+        [
+          [
+            {
+              \\"type\\": \\"div\\",
+              \\"props\\": {
+                \\"key\\": 0
+              },
+              \\"children\\": [
+                \\"one\\"
+              ]
+            },
+            {
+              \\"type\\": \\"div\\",
+              \\"props\\": {
+                \\"key\\": 1
+              },
+              \\"children\\": [
+                \\"two\\"
+              ]
+            }
+          ],
+          {
+            \\"type\\": \\"p\\",
+            \\"props\\": null,
+            \\"children\\": [
+              {
+                \\"type\\": \\"span\\",
+                \\"props\\": null,
+                \\"children\\": [
+                  \\"BarComponent\\"
+                ]
+              },
+              {
+                \\"type\\": \\"p\\",
+                \\"props\\": null,
+                \\"children\\": [
+                  {
+                    \\"type\\": \\"span\\",
+                    \\"props\\": null,
+                    \\"children\\": [
+                      \\"FooComponent\\"
+                    ]
+                  },
+                  {
+                    \\"type\\": \\"span\\",
+                    \\"props\\": null,
+                    \\"children\\": [
+                      [
+                        {
+                          \\"type\\": \\"span\\",
+                          \\"props\\": null,
+                          \\"children\\": [
+                            \\"Bar\\"
+                          ]
+                        }
+                      ]
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      ]
+    }"
+  `);
 });
