@@ -4,7 +4,7 @@
 
 Converts simple stateless React components to a JSON representation.
 
-A typical use case might be where you need to define some tree in a CMS which are then rendered on a client using some pre-defined components
+A typical use case might be where you need to define some tree in a CMS in JSON which is then rendered on a client using some pre-defined components
 
 ![](./docs/example.png)
 
@@ -13,16 +13,18 @@ A typical use case might be where you need to define some tree in a CMS which ar
 
 ```
 yarn add "react-to-json"
+# or
+npm i "react-to-json"
 ```
 
 ## How to use
 
-reactToJSON has two modes, switched with the option `expandDeep`
+reactToJSON has two modes, switched with the option `expandDeep`:
 
-1. Simple renders your JSX to a JSON string almost verbatim without expanding all the components
+1. Simply renders your JSX to a JSON string almost verbatim without expanding all the components
 2. Imports all components and expands them to their DOM primitives
 
-So if you wish to deep render your App.tsx you might do something like
+So if you wish to deep render your App.tsx as JSON you might do something like
 
 ```typescript
 const json = await reactToJSON("App.tsx", {expandDeep: true})
@@ -30,7 +32,7 @@ const json = await reactToJSON("App.tsx", {expandDeep: true})
 
 ## Detailed Example
 
-Say you want to convert the classic Create React App `App.tsx` to JSON:
+Say you want to convert the classic Create React App `App.tsx` (minus a few bits for clarity) to JSON:
 
 ```typescript
 // App.tsx
@@ -109,20 +111,20 @@ This would give the output
 
 - `prettyPrint: Boolean`
   - Default `false`
-  - Set to `true` if you want to pretty print the JSON output (i.e. with new lines and indenting. Defaults to `false`
+  - Set to `true` if you want to pretty print the JSON output (i.e. with new lines and indenting with 2 spaces). Defaults to `false`.
 - `babelConfig: TransformOptions`
-  - The configuration object for the transform. If not set it uses the default version which is a fairly typical default for most React projects
+  - The configuration object for the transform. If not set it uses the default version which is a fairly typical default for most React projects.
 - `expandDeep: Boolean`
   - Default `false`  
-  - If set to `true`, the React tree is fully-expanded to primitives as var as it can go 
+  - If set to `true`, the React tree is fully-expanded to primitives as far as it can go.
 - `logBuildOutput: Boolean`
-  - Outputs a log of the Rollup build
+  - Outputs a log of the Rollup build.
 
 ## Limitations
 
-- Must define the path with a string as opposed to using, for instance, `require`
-- You must import React in that file (even though in React 17.0 you don't need that)
-- At least one of the files you are consuming needs to be TypeScript due to an issue with Rollup's TypeScript plugin I haven't figured out yet
-- Only works with `export default` for now; no named exports
-- Only works with DOM currently (probably)
-- No error handling
+- Must define the path with a string as opposed to using, for instance, `require`.
+- You must import React in that file (even though in React 17.0 you don't need that).
+- At least one of the files you are consuming needs to be TypeScript due to an issue with Rollup's TypeScript plugin I haven't figured out yet.
+- Only works with `export default` for now; no named exports.
+- Only works with DOM currently (probably - not checked).
+- No error handling,
