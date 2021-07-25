@@ -44,7 +44,7 @@ function App({ path }) {
     <div className="App">
     <header className="App-header">
       <p>
-        Edit <code>s{path}</code> and save to reload.
+        Edit <code>{path}</code> and save to reload.
       </p>
       </header>
       </div>
