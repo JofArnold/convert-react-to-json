@@ -1,3 +1,7 @@
+# ⚠️ Warning! 
+
+This suits my needs right now but is quite messy (using Rollup and injecting function `.toString()`s is a real hack!). Current plan is to reduce it all down to a Babel plugin and a custom React renderer to create the JSON, both of which I have drafted so hopefully will be here in a weekend or two!
+
 # convert-react-to-json
 
 ## Outline
@@ -136,3 +140,4 @@ reactToJSON(pathToSource: string, eactComponentProps?: any, options: ReactToJSON
 - Only works with DOM currently and therefore not React Native (probably - not checked).
 - No error handling.
 - No cache optimisations (although for most expected use cases it's fast)
+- Doesn't work with hooks. If you have hooks, it will throw as we're calling render as a function.
