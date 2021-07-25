@@ -3,7 +3,7 @@ import commonjsPlugin from '@rollup/plugin-commonjs';
 import typescriptPlugin from '@rollup/plugin-typescript';
 import * as babel from '@babel/core';
 import * as path from 'path';
-const rollup = require('rollup');
+import * as rollup from 'rollup';
 
 /**
  * A resolver that ensures wherever this build function is ran it'll work when the target
@@ -27,6 +27,7 @@ const resolveRelative = (input: string) => ({
     }
     return null;
   },
+  name: 'resolveRelative',
 });
 
 /**
@@ -56,7 +57,7 @@ export async function build(options: { input: string }): Promise<string> {
     ],
     output: {},
   });
-  const { output } = await bundle.generate(options);
+  const { output } = await bundle.generate({});
   const esnext = output[0].code;
   // Since we're working with CommonJS in node but Rollup required ESNext we transpile again
   const commonjs = babel.transformSync(esnext, {

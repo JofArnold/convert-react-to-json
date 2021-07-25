@@ -1,4 +1,4 @@
-import path from 'path';
+import * as path from 'path';
 import { build } from '../src/build';
 const src = path.resolve(__dirname, '../__fixtures__/simpleTSImport.ts');
 

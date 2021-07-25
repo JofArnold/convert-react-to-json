@@ -48,7 +48,7 @@ react.exports.createElement = ${
       options?.expandDeep
         ? createElementDeep.toString()
         : createElementShallow.toString()
-    }      
+    }
 var __root = exports.default    
 __root; // this is required to be the last statement for vm.runInNewContext
 `;

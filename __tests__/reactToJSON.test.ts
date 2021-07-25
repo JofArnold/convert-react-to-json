@@ -1,5 +1,5 @@
 import { reactToJSON } from '../src';
-const path = require('path');
+import * as path from 'path';
 
 const src = path.resolve(__dirname, '../__fixtures__/JSONComponent.tsx');
 
@@ -21,6 +21,7 @@ test('reactToJSON correctly generates JSON with pretty print', async () => {
     },
     {
       prettyPrint: true,
+      logBuildOutput: true,
     }
   );
 
