@@ -53,7 +53,7 @@ async function reactToJSON(fullFilePath, reactProps, options) {
       
 react.exports.createElement = ${options?.expandDeep
                 ? createElement_1.createElementDeep.toString()
-                : createElement_1.createElementShallow.toString()}      
+                : createElement_1.createElementShallow.toString()}
 var __root = exports.default    
 __root; // this is required to be the last statement for vm.runInNewContext
 `;

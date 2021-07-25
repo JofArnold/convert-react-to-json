@@ -1,4 +1,10 @@
 import { TransformOptions } from '@babel/core';
+export declare type ReactToJSONOptions = {
+    prettyPrint?: boolean;
+    babelConfig?: TransformOptions;
+    expandDeep?: boolean;
+    logBuildOutput?: boolean;
+};
 /**
  * Builds a JSON representation of a React JSX file.
  *
@@ -12,9 +18,4 @@ import { TransformOptions } from '@babel/core';
  *
  * @returns {string} - the stringified result
  */
-export declare function reactToJSON(fullFilePath: string, reactProps: unknown, options?: {
-    prettyPrint?: boolean;
-    babelConfig?: TransformOptions;
-    expandDeep?: boolean;
-    logBuildOutput?: boolean;
-}): Promise<string>;
+export declare function reactToJSON(fullFilePath: string, reactProps: unknown, options?: ReactToJSONOptions): Promise<string>;

@@ -28,7 +28,8 @@ const plugin_commonjs_1 = __importDefault(require("@rollup/plugin-commonjs"));
 const plugin_typescript_1 = __importDefault(require("@rollup/plugin-typescript"));
 const babel = __importStar(require("@babel/core"));
 const path = __importStar(require("path"));
-const rollup = require('rollup');
+const rollup = __importStar(require("rollup"));
+// const rollup = require('rollup');
 /**
  * A resolver that ensures wherever this build function is ran it'll work when the target
  * files have relative imports
@@ -49,6 +50,7 @@ const resolveRelative = (input) => ({
         }
         return null;
     },
+    name: 'resolveRelative',
 });
 /**
  * Compiles a React JSX module to a single commonjs file and returns it as a string
@@ -76,7 +78,7 @@ async function build(options) {
         ],
         output: {},
     });
-    const { output } = await bundle.generate(options);
+    const { output } = await bundle.generate({});
     const esnext = output[0].code;
     // Since we're working with CommonJS in node but Rollup required ESNext we transpile again
     const commonjs = babel.transformSync(esnext, {

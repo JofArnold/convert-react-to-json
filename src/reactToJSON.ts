@@ -7,6 +7,13 @@ const vm = require('vm');
 
 type ArgsType<T> = T extends (...args: infer U) => any ? U : never;
 
+export type ReactToJSONOptions = {
+  prettyPrint?: boolean;
+  babelConfig?: TransformOptions;
+  expandDeep?: boolean;
+  logBuildOutput?: boolean;
+};
+
 /**
  * Builds a JSON representation of a React JSX file.
  *
@@ -23,12 +30,7 @@ type ArgsType<T> = T extends (...args: infer U) => any ? U : never;
 export async function reactToJSON(
   fullFilePath: string,
   reactProps: unknown,
-  options?: {
-    prettyPrint?: boolean;
-    babelConfig?: TransformOptions;
-    expandDeep?: boolean;
-    logBuildOutput?: boolean;
-  }
+  options?: ReactToJSONOptions
 ): Promise<string> {
   let compiled = await build({
     input: fullFilePath,
