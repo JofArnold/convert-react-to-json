@@ -42,12 +42,12 @@ import * as React from "react"
 function App({ path }) {
   return (
     <div className="App">
-    <header className="App-header">
-      <p>
-        Edit <code>{path}</code> and save to reload.
-      </p>
+      <header className="App-header">
+        <p>
+          Edit <code>{path}</code> and save to reload.
+        </p>
       </header>
-      </div>
+    </div>
   );
 }
 
