@@ -1,10 +1,12 @@
-# react-to-json
+# convert-react-to-json
 
 ## Outline
 
 Converts simple stateless React components to a JSON representation.
 
-A typical use case might be where you need to define some components in a CMS which are then rendered on a client.
+A typical use case might be where you need to define some tree in a CMS which are then rendered on a client using some pre-defined components
+
+![](./docs/example.png)
 
 
 ## Installation
