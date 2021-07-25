@@ -1,6 +1,6 @@
 {
   "name": "convert-react-to-json",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Converts React JSX to JSON",
   "main": "dist/index.js",
   "repository": "https://github.com/jofarnold/convert-react-to-json.git",
