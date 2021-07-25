@@ -36,13 +36,15 @@ Say you want to convert the classic Create React App `App.tsx` (minus a few bits
 
 ```typescript
 // App.tsx
+
 import * as React from "react"
-function App() {
+
+function App({ path }) {
   return (
     <div className="App">
     <header className="App-header">
       <p>
-        Edit <code>src/App.js</code> and save to reload.
+        Edit <code>s{path}</code> and save to reload.
       </p>
       </header>
       </div>
@@ -52,28 +54,27 @@ function App() {
 export default App; // <--- Note: you MUST have a default export
 ```
 
-To do this call `reactToJSON` with the path to your file along with the props you wish to send to the default-export'd component and any compile options you may require:
+To do this call `reactToJSON` with the path to your file along with any props you wish to send to the default-export'd component and any compile options you may require:
 
 ```typescript
 // compile.js
+
 const { reactToJSON } = require("react-to-json")
 const path = require("path")
-const src = path.resolve(__dirname, './src/App.tsx');
-(async () => {
+
+const convert = async () => {
+  const src = path.resolve(__dirname, './src/App.tsx');
   const output = await reactToJSON(
-    src,
-    {
-      array: ['one', 'two'],
-    },
-    {
-      prettyPrint: true,
-    }
+    src, // Location of file to convert
+    { path: "src/App.js"}, // Optional react props sent to the default export },
+    { prettyPrint: true } // Options
   );
-  console.log(output)
-})()
+  return output;
+}
+
 ```
 
-Then run in the cli like so
+Either call this function in your code or, for use in the terminal, add `(async () => await convert())();` then run like to:
 
 ```
 NODE_ENV=development node compile.js 
@@ -107,7 +108,13 @@ This would give the output
 }
 ```
 
-## Options
+## Paramters
+
+```typescript
+reactToJSON(pathToSource: string, eactComponentProps?: any, options: ReactToJSONOptions)
+```
+
+### ReactToJSONOptions
 
 - `prettyPrint: Boolean`
   - Default `false`
@@ -126,5 +133,6 @@ This would give the output
 - You must import React in that file (even though in React 17.0 you don't need that).
 - At least one of the files you are consuming needs to be TypeScript due to an issue with Rollup's TypeScript plugin I haven't figured out yet.
 - Only works with `export default` for now; no named exports.
-- Only works with DOM currently (probably - not checked).
-- No error handling,
+- Only works with DOM currently and therefore not React Native (probably - not checked).
+- No error handling.
+- No cache optimisations (although for most expected use cases it's fast)
