@@ -29,29 +29,30 @@ const plugin_typescript_1 = __importDefault(require("@rollup/plugin-typescript")
 const babel = __importStar(require("@babel/core"));
 const path = __importStar(require("path"));
 const rollup = __importStar(require("rollup"));
-// const rollup = require('rollup');
 /**
  * A resolver that ensures wherever this build function is ran it'll work when the target
  * files have relative imports
  * @param input {string} - file path
  */
-const resolveRelative = (input) => ({
-    resolveId: async (code, id) => {
-        const sourceDir = path.dirname(input);
-        if (code.match(/^\.\//) &&
-            !code.match(/node_modules/) &&
-            typeof id === 'string') {
-            const unresolvedPath = path.resolve(sourceDir, code);
-            // If our file is importing like so `import Foo from "./Foo"` then the value
-            // of `code` here is "./Foo" which doesn't have the required file extension.
-            // So we use require.resolve to fix this
-            const resolvedPath = require.resolve(unresolvedPath);
-            return resolvedPath;
-        }
-        return null;
-    },
-    name: 'resolveRelative',
-});
+function resolveRelative(input) {
+    return {
+        async resolveId(code, id) {
+            const sourceDir = path.dirname(input);
+            if (code.match(/^\.\//) &&
+                !code.match(/node_modules/) &&
+                typeof id === 'string') {
+                const unresolvedPath = path.resolve(sourceDir, code);
+                // If our file is importing like so `import Foo from "./Foo"` then the value
+                // of `code` here is "./Foo" which doesn't have the required file extension.
+                // So we use require.resolve to fix this
+                const resolvedPath = require.resolve(unresolvedPath);
+                return resolvedPath;
+            }
+            return null;
+        },
+        name: 'resolveRelative',
+    };
+}
 /**
  * Compiles a React JSX module to a single commonjs file and returns it as a string
  * @param options {object} - Rollup
@@ -84,7 +85,7 @@ async function build(options) {
     const commonjs = babel.transformSync(esnext, {
         filename: 'virtual-file.ts',
         presets: [['@babel/preset-env', { targets: { node: 'current' } }]],
-        plugins: ['transform-node-env-inline'], // Set process.env
+        plugins: ['transform-node-env-inline'], // Set process.env such that `process.env.FOO` etc doesn't fail in babel
     });
     return commonjs?.code;
 }
